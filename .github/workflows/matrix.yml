@@ -4,12 +4,16 @@ on: push
 
 jobs:
   node-version:
+    strategy:
+      matrix:
+        node_version: [6, 8, 10]
+      fail-fast: true
     runs-on: ubuntu-latest
     steps:
       - name: Log node version
         run: node -v
       - uses: actions/setup-node@v1
         with:
-          node-version: 6
+          node-version: ${{ matrix.node_version }}
       - name: Log node version
         run: node -v
